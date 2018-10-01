@@ -1,0 +1,72 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="detailsstyle.css">
+
+<script type="text/javascript">
+function showUser(str) {
+    if (str.length == 0) { 
+        document.getElementById("SelectTxt").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("SelectTxt").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "select.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}
+</script>
+</head>
+
+<body style="background-image: url(bright.jpg);">
+<div class="container centerback">
+<br>
+<h1 align="center">Details Database Operations</h1>
+<br>
+<h4 align = "center">Choose any of the Operations Below</h4>
+<br>
+<button class = "logbuttonbig center" data-toggle="collapse" href="#collapseInsert">Insert</button>
+<div class="collapse" id="collapseInsert" style="margin-top: 10px; border-radius: 10px;">
+  <div class="card card-body">
+    <form action = "insert.php" method = "POST">
+    	<input type="text60" placeholder="Name" class="center" id="name" name="name">
+		<input type="text60" placeholder="Phone" class="center" id="phone" name="phone">
+		<input type="text60" placeholder="E-Mail" class="center" id="email" name="email">
+		<input type="submit" class="logbutton center" value="Submit">
+    </form>
+  </div>
+</div>
+
+<button class = "logbuttonbig center" data-toggle="collapse" href="#collapseSelect">Select</button>
+<div class="collapse" id="collapseSelect" style="margin-top: 10px; border-radius: 10px;">
+  <div class="card card-body">
+  	<h5>Enter Name to display specific person details, type ALL to display all details.</h5>
+    <form action = "select.php" method = "POST">
+    	<input type="text60" placeholder="Name" class="center" id="name" name="name" onkeyup="showUser(this.value)">
+		<div id="SelectTxt"></div>
+    </form>
+  </div>
+   
+</div>
+
+<button class = "logbuttonbig center" data-toggle="collapse" href="#collapseDelete">Delete</button>
+<div class="collapse" id="collapseDelete" style="margin-top: 10px; border-radius: 10px;">
+  <div class="card card-body">
+    <h5>Enter Name to delete specific person record.</h5>
+    <form action = "delete.php" method = "POST">
+    	<input type="text60" placeholder="E-Mail" class="center" id="email" name="email">
+		<input type="submit" class="logbutton center" value="Submit">
+    </form>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
